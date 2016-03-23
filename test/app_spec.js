@@ -85,4 +85,83 @@ describe('Implement Empty App', function(){
 			request(app).get('/').expect(404).end(done);
 		});
 	});
+
+	describe('Implement Error Handling', function(){
+		var app;
+		beforeEach(function(){
+			app = express();
+		});
+		it('should return 500 for unhandled error', function(done){
+			var m1 = function(req, res, next){
+				next(new Error('boom!'));
+			};
+			app.use(m1);
+			request(app).get('/').expect(500).end(done);
+		});
+		it('should return 500 for uncaught error', function(done){
+			var m1 = function(req, res, next){
+				throw new Error('boom!');
+			};
+			app.use(m1);
+			request(app).get('/').expect(500).end(done);
+		});
+		it('should ignore error handlers when "next" is called without an error', function(done){
+			var m1 = function(req, res, next){
+				next();
+			};
+			var e1 = function(err, req, res, next){
+				//timeout
+			};
+			var m2 = function(req, res, next){
+				res.end('m2');
+			};
+			app.use(m1);
+			app.use(e1);
+			app.use(m2);
+			request(app).get('/').expect('m2').end(done);
+		});
+		it('should skip normal middlewares if "next" is called with an error', function(done){
+			var m1 = function(req, res, next){
+				next(new Error('boom!'));
+			};
+			var m2 = function(req, res, next){
+				//timeout
+			};
+			var e1 = function(err, req, res, next){
+				res.end('e1');
+			};
+			app.use(m1);
+			app.use(m2);
+			app.use(e1);
+			request(app).get('/').expect('e1').end(done);
+		});
+	});
+  describe('Implement App Embedding As Middleware', function(){
+    var app, subApp;
+    beforeEach(function(){
+      app = express();
+      subApp = express();
+    });
+    it('should pass unhandled request to parent', function(done){
+      function m2(req, res){
+        res.end('m2');
+      };
+      app.use(subApp);
+      app.use(m2);
+      request(app).get('/').expect('m2').end(done);
+    });
+    it('should pass unhandled error to parent', function(done){
+      app = express();
+      subApp = express();
+      function m1(req, res, next){
+        next('m1 error');
+      };
+      function e1(err, req, res, next){
+        res.end(err);
+      };
+      subApp.use(m1);
+      app.use(e1);
+      request(app).get('/').expect('m1 error').end(done);
+    });
+  });
 });
