@@ -136,6 +136,7 @@ describe('Implement Empty App', function(){
 			request(app).get('/').expect('e1').end(done);
 		});
 	});
+
   describe('Implement App Embedding As Middleware', function(){
     var app, subApp;
     beforeEach(function(){
@@ -160,8 +161,10 @@ describe('Implement Empty App', function(){
         res.end(err);
       };
       subApp.use(m1);
+      app.use(subApp);
       app.use(e1);
       request(app).get('/').expect('m1 error').end(done);
     });
   });
+
 });
