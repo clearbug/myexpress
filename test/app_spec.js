@@ -316,4 +316,11 @@ describe('Implement Empty App', function(){
     });
   });
   
+  describe('app should have the handle method', function(){
+    it('should have the handle method', function(){
+      var app = express();
+      expect(app.handle).to.be.a('function');
+    });
+  });
+
 });
