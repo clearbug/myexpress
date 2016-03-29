@@ -297,4 +297,23 @@ describe('Implement Empty App', function(){
     });
   });
 
+  describe('Implement req.params', function(){
+    var app;
+    before(function(){
+      app = express();
+      app.use('/foo/:a', function(req, res, next){
+        res.end(req.params.a);
+      });
+      app.use('/foo', function(req, res, next){
+        res.end('' + req.params.a);
+      });
+    });
+    it('should make path parameters accessible in req.params', function(done){
+      request(app).get('/foo/google').expect('google').end(done);
+    });
+    it('should make {} the default for req.params', function(done){
+      request(app).get('/foo').expect('undefined').end(done);
+    });
+  });
+  
 });
