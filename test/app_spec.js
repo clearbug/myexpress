@@ -323,4 +323,25 @@ describe('Implement Empty App', function(){
     });
   });
 
+  describe('Prefix path trimming', function(){
+    this.timeout(200000);
+    var app, subapp, barapp;
+    beforeEach(function(){
+      app = express();
+      subapp = express();
+      subapp.use('/bar', function(req, res){
+        res.end('embedded app: ' + req.url);
+      });
+      app.use('/foo', subapp);
+      app.use('/foo', function(req, res){
+        res.end('handler: ' + req.url);
+      });
+    });
+    it('trims request path prefix when calling embedded app', function(done){
+      request(app).get('/foo/bar').expect('embedded app: /bar').end(done);
+    });
+    it('restore trimmed request path to original when going to the next middleware', function(done){
+      request(app).get('/foo').expect('handler: /foo').end(done);
+    });
+  });
 });
