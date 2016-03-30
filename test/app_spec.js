@@ -344,5 +344,18 @@ describe('Implement Empty App', function(){
     it('restore trimmed request path to original when going to the next middleware', function(done){
       request(app).get('/foo').expect('handler: /foo').end(done);
     });
+
+    describe('ensures leading slash', function(){
+      beforeEach(function(){
+        barapp = express();
+        barapp.use('/', function(req, res){
+          res.end('/bar');
+        });
+        app.use('/bar', barapp);
+      });
+      it('ensures that first char is /for trimmed path', function(done){
+        request(app).get('/bar/').expect('/bar').end(done);
+      });
+    });
   });
 });
