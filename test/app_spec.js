@@ -138,6 +138,7 @@ describe('Implement Empty App', function(){
 	});
 
   describe('Implement App Embedding As Middleware', function(){
+    this.timeout(200000);
     var app, subApp;
     beforeEach(function(){
       app = express();

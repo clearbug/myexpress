@@ -1,0 +1,41 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\nodenvm\\node.exe',
+1 verbose cli   'D:\\nodenvm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'uninstall',
+1 verbose cli   'electron-prebuilt',
+1 verbose cli   '-g' ]
+2 info using npm@2.14.12
+3 info using node@v4.3.1
+4 verbose unbuild node_modules\electron-prebuilt
+5 info preuninstall electron-prebuilt@0.37.3
+6 info uninstall electron-prebuilt@0.37.3
+7 verbose unbuild rmStuff electron-prebuilt@0.37.3 from D:\nodenvm\node_modules
+8 silly gentlyRm D:\nodenvm\electron.cmd is being gently removed
+9 silly gentlyRm verifying D:\nodenvm is an npm working directory
+10 silly gentlyRm containing path D:\nodenvm is under npm's control, in D:\nvm\v4.3.1
+11 silly gentlyRm deletion target D:\nodenvm\electron.cmd is under D:\nodenvm
+12 verbose gentlyRm vacuuming from D:\nodenvm\electron.cmd up to D:\nodenvm
+13 silly gentlyRm D:\nodenvm\electron is being gently removed
+14 silly gentlyRm verifying D:\nodenvm is an npm working directory
+15 silly gentlyRm containing path D:\nodenvm is under npm's control, in D:\nvm\v4.3.1
+16 silly gentlyRm deletion target D:\nodenvm\electron is under D:\nodenvm
+17 verbose gentlyRm vacuuming from D:\nodenvm\electron up to D:\nodenvm
+18 info postuninstall electron-prebuilt@0.37.3
+19 silly gentlyRm D:\nodenvm\node_modules\electron-prebuilt is being purged from base D:\nodenvm
+20 verbose gentlyRm don't care about contents; nuking D:\nodenvm\node_modules\electron-prebuilt
+21 silly vacuum-fs purging D:\nodenvm\node_modules\electron-prebuilt
+22 verbose stack Error: EBUSY: resource busy or locked, rmdir 'D:\nodenvm\node_modules\electron-prebuilt'
+22 verbose stack     at Error (native)
+23 verbose cwd D:\sikenode\myexpress
+24 error Windows_NT 6.1.7601
+25 error argv "D:\\nodenvm\\node.exe" "D:\\nodenvm\\node_modules\\npm\\bin\\npm-cli.js" "uninstall" "electron-prebuilt" "-g"
+26 error node v4.3.1
+27 error npm  v2.14.12
+28 error path D:\nodenvm\node_modules\electron-prebuilt
+29 error code EBUSY
+30 error errno -4082
+31 error syscall rmdir
+32 error EBUSY: resource busy or locked, rmdir 'D:\nodenvm\node_modules\electron-prebuilt'
+33 error If you need help, you may report this error at:
+33 error     <https://github.com/npm/npm/issues>
+34 verbose exit [ -4082, true ]
