@@ -8,12 +8,18 @@
   },
   "author": "clearbug",
   "license": "MIT",
+  "dependencies": {
+    "array-flatten": "1.1.1",
+    "debug": "~2.2.0",
+    "methods": "~1.1.2"
+  },
   "devDependencies": {
     "chai": "^1.9.1",
     "cz-conventional-changelog": "^1.1.5",
     "mocha": "^1.18.2",
     "supertest": "^0.10.0"
   },
+  "repository": "clearbug/myexpress",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
